@@ -10,15 +10,16 @@
 <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
 <script type="text/javascript" charset="utf-8" src="fonction.js"></script>
 <script src="http://10.33.171.42:8080/nowjs/now.js"></script>
-<script src="gauge.js"></script>
+<script type="text/javascript" src="gauge.js"></script>
 <script type="text/javascript" src="jscharts.js"></script>
+<script type="text/javascript" src="bindows_gauges/bindows_gauges.js"></script>
 <script>
 	now.KPI = function(){
 		receiveKPI();
 	};
     
  document.addEventListener("deviceready", onDeviceReady, false);
-
+  
 
 </script>
 
@@ -31,7 +32,7 @@
   </div>
   <div data-role="content">
     <div data-role="fieldcontain">
-      <textarea id = "label" cols="250" rows="16" id="textarea"></textarea>
+      <textarea align="center" id = "label" cols="250" rows="16" id="textarea"></textarea>
     </div>
   </div>
   
@@ -42,7 +43,7 @@
       
       </div>
 	<div data-role="content">
-	 <label id ="kpitxt" cols="250" rows="16" id="textarea"></label>
+	 <label align="center" id ="kpitxt" cols="250" rows="16" id="textarea"></label>
 	</div>
   <div data-role="footer">
     <h4>Action</h4>

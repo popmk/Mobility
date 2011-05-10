@@ -6,7 +6,11 @@
  * and private web sites only under special conditions. 
  * Read more at... http://www.netzgesta.de/cvi/LICENSE.txt
  * syntax:
+<<<<<<< HEAD
 	
+=======
+    
+>>>>>>> c85f67751593a895beaa3c724dbfa62487ec1ae5
 	gauge.defaultWidth		= 400;		//INT 48|8-n (px canvas|var width) 
 	gauge.defaultHeight		= 30;		//INT 12|48-n (px canvas|var height) (should be dividable by 3)
 	gauge.defaultName		= null;		//STR (canvas|var name|id)
@@ -152,4 +156,8 @@ var gauge = { version : 1.4, released : '2010-08-10 12:00:00',
 	remove : function(self) {
 		if(self) {if(self.tagName.toUpperCase()=="CANVAS"||self.tagName.toUpperCase()=="VAR") {var parent=self.parentNode; parent.removeChild(self);}}return false;
 	}
+<<<<<<< HEAD
 }	
+=======
+}	
+>>>>>>> c85f67751593a895beaa3c724dbfa62487ec1ae5
