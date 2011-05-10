@@ -73,6 +73,11 @@ function add_li(txt,id) {
          if(now.type=="gauge"){
               my_gauge =gauge.add(document.getElementById('kpi'),{limit:true,gradient:true,values:[now.KPIcurrent,100]});
          }
+         if(now.type=="truegauge"){
+             document.getElementById('kpi').innerHTML = "<div id=\"gaugeDiv\" style=\"width: 150; height: 150\" ></div>";
+            var gauge = bindows.loadGaugeIntoDiv("gauge.xml", "gaugeDiv");
+            
+         }
         
       KPItxt = document.getElementById('kpitxt');
         KPItxt.innerHTML = ("Seuil d'alerte : " + now.KPIalert + "<br> niveau minimum : " + now.KPImin + "      "+ "courant :" +now.KPIcurrent +"<br> niveau maximum : " + now.KPImax );
@@ -92,6 +97,9 @@ function add_li(txt,id) {
            document.getElementById('kpi').innerHTML = "";
              my_gauge =gauge.add(document.getElementById('kpi'),{limit:true,gradient:true,values:[now.KPIcurrent,100]});
         }            
+        if(now.type=="truegauge"){
+         gauge.needle.setValue(now.KPIcurrent);   
+        }
     KPItxt = document.getElementById('kpitxt');
 		KPItxt.innerHTML = ("Seuil d'alerte : " + now.KPIalert + "<br> niveau minimum : " + now.KPImin + "      "+ "courant :" +now.KPIcurrent +"<br> niveau maximum : " + now.KPImax );
     }
