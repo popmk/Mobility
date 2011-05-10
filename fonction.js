@@ -1,9 +1,10 @@
 // JavaScript Document
- var my_gauge
+ var my_gauge;
+ var taille = 4;
  var KPItxt;
 var myData = new Array([0, 25], [5, 50], [10, 55], [15, 45]);
 this.now.name = "Pop";
-var taille = 4;
+
 
 
 
@@ -15,6 +16,7 @@ var taille = 4;
                             'Device Platform: ' + device.platform +  
                             'Device UUID: '     + device.uuid     +  
                             'Device Version: '  + device.version  ;
+                            navigator.notification.vibrate(200);
     }
 
 
@@ -38,7 +40,7 @@ var taille = 4;
 	function proposeAction(){
 	
 	add_li("URL","url");	
-	addLink("url","www.google.fr");
+	addLink("url","www.free.fr");
 	add_li("Mail To","mail");
 	add_li("Augmenter seuil alerte","up").onclick = function up(){now.KPIalert++; var KPItxt = document.getElementById('kpitxt'); KPItxt.innerHTML = ("Seuil d'alerte : " + now.KPIalert + "<br> niveau minimum : " + now.KPImin + "<br> niveau maximum : " + now.KPImax ); };	
 	add_li("Diminuer seuil alerte","down").onclick = function down(){now.KPIalert--; var KPItxt = document.getElementById('kpitxt'); KPItxt.innerHTML = ("Seuil d'alerte : " + now.KPIalert + "<br> niveau minimum : " + now.KPImin + "<br> niveau maximum : " + now.KPImax ); };
@@ -70,16 +72,18 @@ function add_li(txt,id) {
 		b.setAttribute('href',url);			
 	}
 
-	function receiveKPI(){
-		document.getElementById('kpi').innerHTML = ""; 					
-		myData.push([myData.length*5,now.KPIcurrent]);					
+	
+function receiveKPI(){
+        myData.shift();
+        document.getElementById('kpi').innerHTML = ""; 					
+		myData.push([taille*5,now.KPIcurrent]);					
+        taille = taille + 1;
 		var myChart = new JSChart('kpi', 'line');
 		myChart.setDataArray(myData);			
 		myChart.draw();
 		KPItxt = document.getElementById('kpitxt');
 		KPItxt.innerHTML = ("Seuil d'alerte : " + now.KPIalert + "<br> niveau minimum : " + now.KPImin + "<br> niveau maximum : " + now.KPImax );		
 	}
-
 
 
 
