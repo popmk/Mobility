@@ -1,4 +1,4 @@
-﻿var fs = require('fs');
+var fs = require('fs');
 var server = require('http').createServer(function(req, response){
   fs.readFile(__dirname+'/helloworld.html', function(err, data){
     response.writeHead(200, {'Content-Type':'text/html'}); 
@@ -6,7 +6,7 @@ var server = require('http').createServer(function(req, response){
     response.end();
   });
 });
-server.listen(8080);
+server.listen(process.env.C9_PORT);
 var everyone = require("now").initialize(server);
 
 
@@ -27,17 +27,17 @@ everyone.disconnected(function(){
 });
 
 
+function Generate(){
+everyone.now.KPI();
+everyone.now.KPIcurrent = everyone.now.KPIcurrent +5;
+console.log("Generate : " + everyone.now.KPIcurrent);
+}
 
 
 everyone.now.LaunchKPI = function(){	
 	setInterval(Generate(),4000);
 };
 
-function Generate(){
-everyone.now.KPI();
-everyone.now.KPIcurrent = everyone.now.KPIcurrent +5;
-console.log("Generate : " + everyone.now.KPIcurrent);
-};
 
 everyone.now.description = "Surveillance compte en ligne";
 everyone.now.KPImin = 20;
