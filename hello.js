@@ -7,8 +7,9 @@ var server = require('http').createServer(function(req, response){
   });
 });
 server.listen(process.env.C9_PORT);
-var everyone = require("now").initialize(server);
-
+var nowjs = require("now");
+var everyone = nowjs.initialize(server);
+var KPIgroup = nowjs.getGroup("KPIuser");
 
 
 
@@ -19,11 +20,13 @@ everyone.now.Log = function(txt){
 
 everyone.connected(function(){
   console.log("Joined: " + this.now.name);	
+  this.now.addToKPIgroup();
 });
 
 
 everyone.disconnected(function(){
   console.log("Left: " + this.now.name);
+  this.now.removeFromGroup();
 });
 
 
@@ -36,6 +39,21 @@ console.log("Generate : " + everyone.now.KPIcurrent);
 
 everyone.now.LaunchKPI = function(){	
 	setInterval(Generate(),4000);
+};
+
+
+everyone.now.addToKPIgroup = function(){
+  KPIgroup.addUser(this.user.clientId);
+};
+
+everyone.now.removeFromGroup = function(){
+  KPigroup.removeUser(this.user.clientId);
+};
+
+
+everyone.now.sendToKPIgroup = function(){
+  KPIgroup = nowjs.getGroup("KPIuser");
+  KPIgroup.now.receiveMessage("Hello");
 };
 
 

@@ -18,6 +18,10 @@
 		receiveKPI();
 	};
     
+    now.receiveMessage = function(name, message){
+         document.getElementById('label').value =  message;
+    };
+    
  document.addEventListener("deviceready", onDeviceReady, false);
   
 
