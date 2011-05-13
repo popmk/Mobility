@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="http://code.jquery.com/mobile/1.0a3/jquery.mobile-1.0a3.min.css" rel="stylesheet" type="text/css" />
+<script src="http://code.jquery.com/jquery-1.5.min.js" type="text/javascript"></script>
+<link href="http://code.jquery.com/jquery-1.5.min.js" rel="stylesheet" type="text/css" />
+<script src="http://code.jquery.com/mobile/1.0a3/jquery.mobile-1.0a3.min.js" type="text/javascript"></script>
+<script type="text/javascript" charset="utf-8" src="fonction.js"></script>
+<script src="http://10.33.171.42:8080/nowjs/now.js"></script>
+</head>
+
+
+
+<body>
+
+    <div data-role="page" id="page">
+        <div data-role="header">
+            <h1>Options</h1>
+        </div>
+        <div data-role="content">
+            <ul id="list" data-role="listview">
+             <div data-role="footer">
+                    <h1 align="center">KPIalert</label>
+            </div>
+                    <div data-role="controlgroup" data-type="horizontal" align="center">
+                        <a data-role="button" onclick="kpialertdown()">-</a>
+                    	<a data-role="button" onclick="kpialertup()">+</a>
+                    </div>
+                     <label id="kpialert" align="center"></label>
+                    
+                <div data-role="footer"> 
+                    <h1 align="center">KPImin</label>
+                </div>
+                     <div data-role="controlgroup" data-type="horizontal" align="center">
+                        <a data-role="button" onclick="kpimindown()">-</a>
+                        <a data-role="button" onclick="kpiminup()">+</a>
+                    </div>
+                    <label id="kpimin" align="center"></label>
+                    
+                 <div data-role="footer">
+                    <h1 align="center">KPImax</label>
+                </div>
+                     <div data-role="controlgroup" data-type="horizontal" align="center">
+                        <a data-role="button" onclick="kpimaxdown()">-</a>
+                        <a data-role="button" onclick="kpimaxup()">+</a>
+                    </div>
+                    <label id="kpimax" align="center"></label>
+                
+            </ul>
+         <div data-role="content">
+            <ul id="list" data-role="listview">
+                <li id="addg" ><a href="LoadKPI.html">S'abonner à un KPI</a></li>
+                <li id="removeg" ><a href="#" onclick="getKPI()">Se désabonner d'un KPI</a></li>
+            </ul>
+        </div>
+        </div>
+    </div>
+    <script type="text/javascript">         
+        document.getElementById('kpialert').innerHTML = "KPIalert = " + now.KPIalert;
+        document.getElementById('kpimin').innerHTML = "KPImin = " + now.KPImin;
+        document.getElementById('kpimax').innerHTML = "KPImax = " + now.KPImax;    
+       </script>
+</body>

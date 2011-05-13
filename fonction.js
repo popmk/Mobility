@@ -3,6 +3,7 @@ var my_gauge;
 var taille = 4;
 var KPItxt;
 var myChart;
+var gauge;
 var myData = new Array([0, 40], [5, 50], [10, 55], [15, 45]);
 this.now.name = "Pop";
 
@@ -22,17 +23,17 @@ this.now.name = "Pop";
 
 
     	function getKPI(){      
- 	
-    document.getElementById('label').value = now.description; 	
-	document.getElementById('list').innerHTML = "";    
+
+ 	document.getElementById('label').value = now.description; 	
 	drawKPI();
 	proposeAction();
 	now.LaunchKPI();
     	}	
 
 	function proposeAction(){
-	add_li("Augmenter seuil alerte","up").onclick = function up(){now.KPIalert++; var KPItxt = document.getElementById('kpitxt');     KPItxt.innerHTML = ("Seuil d'alerte : " + now.KPIalert + "<br> niveau minimum : " + now.KPImin + "      "+ "courant :" +now.KPIcurrent +"<br> niveau maximum : " + now.KPImax ); };	
-	add_li("Diminuer seuil alerte","down").onclick = function down(){now.KPIalert--; var KPItxt = document.getElementById('kpitxt');     KPItxt.innerHTML = ("Seuil d'alerte : " + now.KPIalert + "<br> niveau minimum : " + now.KPImin + "      "+ "courant :" +now.KPIcurrent +"<br> niveau maximum : " + now.KPImax );; };
+    add_li("Stop Alert","stopalert").onclick = function stopalert(){now.StopAlert(); menuStop();};
+    add_li("Abonnement KPI","abo").onclick = function add(){now.addToKPIgroup();};
+    add_li("Msg","msg").onclick = function msg(){now.sendToKPIgroup();};
 	}
 
 function add_li(txt,id) { 	
@@ -74,9 +75,9 @@ function add_li(txt,id) {
               my_gauge =gauge.add(document.getElementById('kpi'),{limit:true,gradient:true,values:[now.KPIcurrent,100]});
          }
          if(now.type=="truegauge"){
-             document.getElementById('kpi').innerHTML = "<div id=\"gaugeDiv\" style=\"width: 150; height: 150\" ></div>";
-            var gauge = bindows.loadGaugeIntoDiv("gauge.xml", "gaugeDiv");
-            
+             document.getElementById('kpi').innerHTML = "<div id=\"gaugeDiv\" style=\"width: 100; height: 100\" ></div>";
+            gauge = bindows.loadGaugeIntoDiv("gauge.xml", "gaugeDiv");
+            gauge.needle.setValue(now.KPIcurrent);  
          }
         
       KPItxt = document.getElementById('kpitxt');
@@ -98,7 +99,11 @@ function add_li(txt,id) {
              my_gauge =gauge.add(document.getElementById('kpi'),{limit:true,gradient:true,values:[now.KPIcurrent,100]});
         }            
         if(now.type=="truegauge"){
-         gauge.needle.setValue(now.KPIcurrent);   
+         document.getElementById('kpi').innerHTML = "<div id=\"gaugeDiv\" style=\"width: 150; height: 150\" ></div>";
+            gauge = bindows.loadGaugeIntoDiv("gauge.xml", "gaugeDiv");
+            gauge.needle.setValue(now.KPIcurrent);  
+            gauge.limbasse.setValue(now.KPImin);
+            gauge.limhaute.setValue(now.KPImax);
         }
     KPItxt = document.getElementById('kpitxt');
 		KPItxt.innerHTML = ("Seuil d'alerte : " + now.KPIalert + "<br> niveau minimum : " + now.KPImin + "      "+ "courant :" +now.KPIcurrent +"<br> niveau maximum : " + now.KPImax );
@@ -119,18 +124,73 @@ function checkalert(){
 
 	
 function alert(){
+    document.getElementById('list').innerHTML = "";
     navigator.notification.vibrate(200); 
     add_li("URL","url");	
-	addLink("url","www.free.fr");
+	addLink("url","http://www.google.fr");
 	add_li("Mail To","mail");
-    add_li("Relancer alerte","alert").onclick = function alerte(){getKPI()};
-    add_li("Changer KPI","change").onclick = function change(){if(now.type=="gauge"){now.type="chart"}else{now.type="gauge"} navigator.notification.alert("Type : "+ now.type); };
+    menuStop();
     navigator.notification.alert("Alerte, Seuil dépassé");
     now.StopAlert();
     
 }
+
+function menuStop(){
+   
+    add_li("Relancer alerte","alert").onclick = function alerte(){getKPI()}; 
+    add_li("Changer KPI","change");
+    addLink("change","ListKPI.html");
+    add_li("Options","opt");
+    addLink("opt","option.html");
+   
+}
 	
 
 
+
+function Gauge(){
+        now.type="gauge";
+        
+    };
+function TrueGauge(){
+      now.type="truegauge";    
+    };
+function Chart(){
+        now.type="chart";
+    };
 	
+function kpioptions(){
+        var kpialert = document.getElementById('kpialert'); kpialert.innerHTML = "KPIalert = " + now.KPIalert;
+        var kpimin = document.getElementById('kpimin'); kpimin.innerHTML = "KPImin = " + now.KPImin;
+        var kpimax = document.getElementById('kpimax'); kpimax.innerHTML = "KPImax = " + now.KPImax;
+   }
+   
+function kpialertdown(){
+    now.KPIalert--;
+    document.getElementById('kpialert').innerHTML = "KPIalert = " + now.KPIalert;
+    };
+function kpialertup(){
+    now.KPIalert++;
+    document.getElementById('kpialert').innerHTML = "KPIalert = " + now.KPIalert;
+    };
+function kpimindown(){
+    now.KPImin--;
+    document.getElementById('kpimin').innerHTML = "KPImin = " + now.KPImin;
+    gauge.limbasse.setEndValue(now.KPImin);
+    };
+function kpiminup(){
+    now.KPImin++;
+    document.getElementById('kpimin').innerHTML = "KPImin = " + now.KPImin;
+    gauge.limbasse.setValue(now.KPImin);
+    };
+function kpimaxdown(){
+    now.KPImax--;
+    document.getElementById('kpimax').innerHTML = "KPImax = " + now.KPImax;
+    gauge.limhaute.setValue(now.KPImax);
+    };
+function kpimaxup(){
+    now.KPImax++;
+    document.getElementById('kpimax').innerHTML = "KPImax = " + now.KPImax;
+    gauge.limhaute.setValue(now.KPImax);
+    };
 

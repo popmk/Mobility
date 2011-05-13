@@ -1,21 +1,39 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<titlle>Bindows gauge</title>
+<title>Bindows gauge sample</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <script type="text/javascript" src="bindows_gauges/bindows_gauges.js"></script>
 
-<script>
-            document.getElementById('page').innerHTML = "<div id=\"gaugeDiv\" style=\"width: 150; height: 150\" ></div>";
-            var gauge = bindows.loadGaugeIntoDiv("gauge.xml", "gaugeDiv");
-</script>            
-            
+
 </head>
-
-
 <body>
-<div data-role="page" id="page">
+<div id="gaugeDiv" style="width: 150; height: 150" ></div>
+<script type="text/javascript">
+    var gauge = bindows.loadGaugeIntoDiv("gauge.xml", "gaugeDiv");
+    
+function click(){
+      gauge.needle.setValue(Math.random()*100); 
+     
 
 
-</div>
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.open("GET","gauge.xml",false);
+xmlhttp.send();
+xmlDoc=xmlhttp.responseXML;
+
+xmlDoc.getElementById('limbasse').setEndValue(50);
+document.getElementById('gaugeDiv').invalidateParentLayout();
+ 
+    };
+</script>
+
+<a id="b" onclick="click()" >Click</a>
 </body>
+</html>

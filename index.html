@@ -18,7 +18,7 @@
 		receiveKPI();
 	};
     
-    now.receiveMessage = function(name, message){
+    now.receiveMessage = function(message){
          document.getElementById('label').value =  message;
     };
     
@@ -54,7 +54,9 @@
     </div>
     <div data-role="content">
      <ul id="list" data-role="listview">
-      <li><a id="b" href="#" onclick="getKPI()">Obtenir KPI</a></li>     
+      <li id="b" ><a href="#" onclick="getKPI()">Obtenir KPI</a></li> 
+      <li><a href="option.html">Options</a></li>
+      <li><a href="ListKPI.html">List KPI</a></li>
     </ul>
   
    
