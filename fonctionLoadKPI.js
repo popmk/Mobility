@@ -1,6 +1,6 @@
 
 function add_li(txt,id) {     
-	var oUl = document.getElementById('list'); 
+	var oUl = document.getElementById('listloadkpi'); 
 	var oLi = document.createElement("li"); 
 	var oText = document.createTextNode(txt); 		
 	var b = document.createElement("a");
@@ -18,4 +18,13 @@ function add_li(txt,id) {
 	div2.appendChild(b);
 	oLi.setAttribute('class','ui-btn ui-btn-up-c ui-btn-icon-right ui-li');
 	return b;
+}
+
+
+function listgroup(){
+  navigator.notification.alert("Alerte, Seuil dépassé");
+   for(i=0; i < now.listgroup.length ; i ++){
+    add_li(now.listgroup[i],("li"+i));   
+   }
+    
 }
