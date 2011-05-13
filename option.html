@@ -13,7 +13,6 @@
 
 
 <body>
-
     <div data-role="page" id="page">
         <div data-role="header">
             <h1>Options</h1>
@@ -45,15 +44,8 @@
                         <a data-role="button" onclick="kpimaxdown()">-</a>
                         <a data-role="button" onclick="kpimaxup()">+</a>
                     </div>
-                    <label id="kpimax" align="center"></label>
-                
-            </ul>
-         <div data-role="content">
-            <ul id="list" data-role="listview">
-                <li id="addg" ><a href="LoadKPI.html">S'abonner à un KPI</a></li>
-                <li id="removeg" ><a href="#" onclick="getKPI()">Se désabonner d'un KPI</a></li>
-            </ul>
-        </div>
+                    <label id="kpimax" align="center"></label>                
+            </ul>       
         </div>
     </div>
     <script type="text/javascript">         
@@ -62,3 +54,5 @@
         document.getElementById('kpimax').innerHTML = "KPImax = " + now.KPImax;    
        </script>
 </body>
+
+</html>
