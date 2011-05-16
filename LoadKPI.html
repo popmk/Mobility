@@ -14,26 +14,19 @@
     <script type="text/javascript" charset="utf-8" src="fonction.js"></script>
     <script type="text/javascript" charset="utf-8" src="fonctionLoadKPI.js"></script>   
     <script type="text/javascript">   
-     document.addEventListener("deviceready", onDeviceReady, false);
+        document.addEventListener("deviceready", onDeviceReady, false);
     </script>
 </head>
 
-
 <body>
-<script type="text/javascript">
-    navigator.notification.alert("listgroup");
-       for(i=0; i < now.listgroup.length ; i ++){
-        add_li(now.listgroup[i],"li");   
-       }
-</script>
-
     <div data-role="page" id="page">
         <div data-role="header">
             <h1>Choix du KPI</h1>
         </div>        
         <div data-role="content">
-            <ul id="listloadkpi" data-role="listview">
-               <li><a id="customLink" data-role="button" onclick="listgroup();">Charger les indicateurs</a></li>
+            <ul id="listloadkpi" data-role="listview">  
+                <li><a href="ListKPI.html">Créer nouvel indicateur</a></li>  
+                <script>listGroup();</script>
             </ul>
         </div>
     </div>

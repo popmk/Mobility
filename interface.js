@@ -15,6 +15,7 @@ function menu(){
     add_li("Stop Alert","stopalert").onclick = function stopalert(){now.StopAlert(); menuStop();};
 	add_li("Choix indicateur visuel","change"); addLink("change","ListKPI.html");	
 	add_li("Options","opt"); addLink("opt","option.html");	
+    add_li("S'abonner a un KPI","abokpi"); addLink("abokpi","LoadKPI.html");
 }
 
 
@@ -71,8 +72,7 @@ function drawKPI(){
 	document.getElementById('kpi').innerHTML = "";
 	if(now.type=="chart"){
 		myChart = new JSChart('kpi', 'line');
-		myChart.setDataArray(myData);  
-		
+		myChart.setDataArray(myData);  		
 		myChart.setTitle("KPI");                        
 		myChart.draw();   
 	}

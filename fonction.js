@@ -9,15 +9,6 @@ now.name = 'Pop';
 var currentgroup = "KPIuser";
 
 
-         
-$(document).ready(function() {
-   now.Log("ok");
-    
-    $('.customLink').live('click', function() {
-       navigator.notification.alert("onload");
-    });
-});
-
 
 function description() {
     document.getElementById('label').value = 'Device Name: '     + device.name     + '<br />' + 
@@ -28,8 +19,7 @@ function description() {
 }
 
 
-function getKPI(){      
-
+function getKPI(){  
 	document.getElementById('label').value = now.description; 
     document.getElementById('list').innerHTML = "";
 	drawKPI();
@@ -69,44 +59,44 @@ function kpioptions(){
 
 function kpialertdown(){
 	now.KPIalert--;
-	document.getElementById('kpialert').innerHTML = "KPIalert = " + now.KPIalert;
+	document.getElementById('kpialert').innerHTML = " <h1> KPI alert " + now.KPIalert + "</h1>";
 };
 function kpialertup(){
 	now.KPIalert++;
-	document.getElementById('kpialert').innerHTML = "KPIalert = " + now.KPIalert;
+	document.getElementById('kpialert').innerHTML = " <h1> KPI alert " + now.KPIalert + "</h1>";
 };
 function kpimindown(){
 	now.KPImin--;
-	document.getElementById('kpimin').innerHTML = "KPImin = " + now.KPImin;
+    document.getElementById('kpimin').innerHTML = " <h1> KPI min " + now.KPImin + "</h1>";
 	gauge.limbasse.setEndValue(now.KPImin);
 };
 function kpiminup(){
 	now.KPImin++;
-	document.getElementById('kpimin').innerHTML = "KPImin = " + now.KPImin;
+    document.getElementById('kpimin').innerHTML = " <h1> KPI min " + now.KPImin + "</h1>";
 	gauge.limbasse.setValue(now.KPImin);
 };
 function kpimaxdown(){
 	now.KPImax--;
-	document.getElementById('kpimax').innerHTML = "KPImax = " + now.KPImax;
+	 document.getElementById('kpimax').innerHTML = " <h1> KPI max " + now.KPImax + "</h1>";
 	gauge.limhaute.setValue(now.KPImax);
 };
 function kpimaxup(){
 	now.KPImax++;
-	document.getElementById('kpimax').innerHTML = "KPImax = " + now.KPImax;
+	 document.getElementById('kpimax').innerHTML = " <h1> KPI max " + now.KPImax + "</h1>";
 	gauge.limhaute.setValue(now.KPImax);
 };
 
 
-function add_liKPI(txt,id) {     
+function add_liKPI(txt,idx) {     
     var oUl = document.getElementById('listloadkpi'); 
 	var oLi = document.createElement("li"); 
 	var oText = document.createTextNode(txt); 		
 	var b = document.createElement("a");
 	var div = document.createElement("div");
 	var div2 = document.createElement("div");
-	b.setAttribute('id',id);
 	b.setAttribute('href',"#");
-	b.appendChild(oText); 
+	b.appendChild(oText);
+    b.setAttribute("idx",idx);
 	oUl.appendChild(oLi); 
 	oLi.appendChild(div);
 	div.setAttribute('class','ui-btn-inner');
@@ -115,15 +105,22 @@ function add_liKPI(txt,id) {
 	div2.setAttribute('class','ui-btn-text');
 	div2.appendChild(b);
 	oLi.setAttribute('class','ui-btn ui-btn-up-c ui-btn-icon-right ui-li');
-	return b;
+  
+    return b;
 }
 
-
-function listgroup(){
-  navigator.notification.alert("listgroup");
-   for(i=0; i < now.listgroup.length ; i ++){
-    add_liKPI(now.listgroup[i],"li");   
-   }
+function listGroup(){
+    for(i = 0; i < now.array.length ; i++){
+        add_liKPI(now.array[i],i).onclick = onKPIClicked;
+    }
     
-}
+    
+    function onKPIClicked(event){
+        now.ChangeGroup(event.target.getAttribute("idx"));
+    }
+};
+
+
+    
+
 

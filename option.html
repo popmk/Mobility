@@ -9,9 +9,6 @@
 <script type="text/javascript" charset="utf-8" src="fonction.js"></script>
 <script src="http://10.33.171.42:8080/nowjs/now.js"></script>
 </head>
-
-
-
 <body>
     <div data-role="page" id="page">
         <div data-role="header">
@@ -22,37 +19,39 @@
              <div data-role="footer">
                     <h1 align="center">KPIalert</label>
             </div>
-                    <div data-role="controlgroup" data-type="horizontal" align="center">
-                        <a data-role="button" onclick="kpialertdown()">-</a>
-                    	<a data-role="button" onclick="kpialertup()">+</a>
-                    </div>
-                     <label id="kpialert" align="center"></label>
-                    
-                <div data-role="footer"> 
-                    <h1 align="center">KPImin</label>
+                <div data-role="controlgroup" data-type="horizontal" align="center">
+                    <a data-role="button" onclick="kpialertdown()">-</a>
+                    <a data-role="button" onclick="kpialertup()">+</a>
                 </div>
-                     <div data-role="controlgroup" data-type="horizontal" align="center">
-                        <a data-role="button" onclick="kpimindown()">-</a>
-                        <a data-role="button" onclick="kpiminup()">+</a>
-                    </div>
-                    <label id="kpimin" align="center"></label>
-                    
-                 <div data-role="footer">
+                     <div id="kpialert" align="center" data-role="content"></div>                    
+                <div data-role="content">
+                     <script>document.getElementById('kpialert').innerHTML = " <h1> KPI alert " + now.KPIalert + "</h1>";</script>
+                </div>
+                <div data-role="footer"> 
+                     <h1 align="center">KPImin</label>
+                </div>
+                 <div data-role="controlgroup" data-type="horizontal" align="center">
+                    <a data-role="button" onclick="kpimindown()">-</a>
+                    <a data-role="button" onclick="kpiminup()">+</a>
+                </div>
+                <div data-role="content">
+                    <div id="kpimin" align="center" data-role="content"></div>
+                </div>
+                     <script>document.getElementById('kpimin').innerHTML = " <h1> KPI min " + now.KPImin + "</h1>";</script>
+                <div data-role="footer">
                     <h1 align="center">KPImax</label>
                 </div>
-                     <div data-role="controlgroup" data-type="horizontal" align="center">
-                        <a data-role="button" onclick="kpimaxdown()">-</a>
-                        <a data-role="button" onclick="kpimaxup()">+</a>
-                    </div>
-                    <label id="kpimax" align="center"></label>                
+                <div data-role="controlgroup" data-type="horizontal" align="center">
+                    <a data-role="button" onclick="kpimaxdown()">-</a>
+                    <a data-role="button" onclick="kpimaxup()">+</a>
+                </div>
+                <div data-role="content">
+                    <div id="kpimax" align="center" data-role="content"></div>                
+                     <script>document.getElementById('kpimax').innerHTML = " <h1> KPI max " + now.KPImax + "</h1>";</script>
+                </div>
             </ul>       
         </div>
     </div>
-    <script type="text/javascript">         
-        document.getElementById('kpialert').innerHTML = "KPIalert = " + now.KPIalert;
-        document.getElementById('kpimin').innerHTML = "KPImin = " + now.KPImin;
-        document.getElementById('kpimax').innerHTML = "KPImax = " + now.KPImax;    
-       </script>
 </body>
 
 </html>
