@@ -114,12 +114,31 @@ function listGroup(){
         add_liKPI(now.array[i],i).onclick = onKPIClicked;
     }
     
-    
     function onKPIClicked(event){
         now.ChangeGroup(event.target.getAttribute("idx"));
     }
 };
 
+function creernewkpi(){
+    var nom = document.getElementById('txtnom').value;
+    var desc = document.getElementById('txtdesc').value;
+    var min = document.getElementById('txtmin').value;
+    var max = document.getElementById('txtmax').value;
+    var alert = document.getElementById('txtalert').value;
+    
+    if(document.getElementById('Choix_0').checked == true)
+        var type = "gauge";
+    if(document.getElementById('Choix_1').checked==true)
+        var type = "truegauge";
+    if(document.getElementById('Choix_2').checked==true)
+        var type = "chart";   
+        
+    navigator.notification.alert("nom : " + nom + " desc : " + desc + " min : " + min + " max :  " + max +" alert : " + alert + " type :" +type );
+    now.addToGroup(nom,desc,min,max,alert,type);
+    
+    
+    listGroup();
+};
 
     
 

@@ -6,6 +6,13 @@
 <link href="http://code.jquery.com/mobile/1.0a3/jquery.mobile-1.0a3.min.css" rel="stylesheet" type="text/css" />
 <script src="http://code.jquery.com/jquery-1.5.min.js" type="text/javascript"></script>
 <script src="http://code.jquery.com/mobile/1.0a3/jquery.mobile-1.0a3.min.js" type="text/javascript"></script>
+<script type="text/javascript" charset="utf-8" src="fonction.js"></script>
+<script src="http://10.33.171.42:8080/nowjs/now.js"></script>
+<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+
+<script>
+
+</script>
 </head>
 
 <body>
@@ -13,41 +20,48 @@
   <div data-role="header">
     <h1>Création nouvel indicateur</h1>
   </div>
+   <div data-role="fieldcontain">
+    <label for="textinput2">Nom de l'indicateur</label>
+    <input type="text" name="textinput2" id="txtnom" value=""  />
+  </div>
   <div data-role="content"></div>
   <div class="ui-grid-a">
     <div class="ui-block-a">Description</div><div class="ui-block-b">
       <div data-role="fieldcontain">
         <label for="textinput"></label>
-        <input type="text" name="textinput" id="textinput" value=""  />
+        <input type="text" name="textinput" id="txtdesc" value=""  />
       </div>
     </div>
     <div class="ui-block-a">KPImin</div>
     <div class="ui-block-b"><div data-role="fieldcontain">
         <label for="textinput"></label>
-        <input type="text" name="textinput" id="textinput" value=""  />
+        <input type="text" name="textinput" id="txtmin" value=""  />
       </div></div>
     <div class="ui-block-a">KPImax</div><div class="ui-block-b">  
     <div data-role="fieldcontain">
         <label for="textinput"></label>
-        <input type="text" name="textinput" id="textinput" value=""  />
+        <input type="text" name="textinput" id="txtmax" value=""  />
       </div></div>
     <div class="ui-block-a">KPIalert</div><div class="ui-block-b"> 
      <div data-role="fieldcontain">
         <label for="textinput"></label>
-        <input type="text" name="textinput" id="textinput" value=""  />
+        <input type="text" name="textinput" id="txtalert" value=""  />
       </div></div>
   </div>
   <div data-role="fieldcontain">
-    <fieldset data-role="controlgroup">
+  <div data-role="fieldcontain">
+     <fieldset data-role="controlgroup">
       <legend>Choix de l'indicateur</legend>
-      <input type="radio" name="radio1" id="radio1_0" value="" />
-      <label for="radio1_0">Gauge</label>
-      <input type="radio" name="radio1" id="radio1_1" value="" />
-      <label for="radio1_1">TrueGauge</label>
-      <input type="radio" name="radio1" id="radio1_2" value="" />
-      <label for="radio1_2">Chart</label>
+      <input type="radio" name="Choix" id="Choix_0" value="" />
+      <label for="Choix_0">Barre de Progression</label>
+      <input type="radio" name="Choix" id="Choix_1" value="" />
+      <label for="Choix_1">Jauge</label>
+      <input type="radio" name="Choix" id="Choix_2" value="" />
+      <label for="Choix_2">Graphique</label>
     </fieldset>
+    </div>
   </div>
+  <a href="#" data-role="button" onclick="creernewkpi()">Valider</a> </div>
 </div>
 </body>
 </html>
