@@ -8,10 +8,18 @@
 <script src="http://code.jquery.com/mobile/1.0a3/jquery.mobile-1.0a3.min.js" type="text/javascript"></script>
 <script type="text/javascript" charset="utf-8" src="fonction.js"></script>
 <script src="http://10.33.171.42:8080/nowjs/now.js"></script>
+    <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+    
+    <script>
+    function help(){
+        navigator.notification.vibrate(200);
+        };
+    </script>
 </head>
 <body>
     <div data-role="page" id="page">
-        <div data-role="header">
+        <div data-role="header" data-backbtn="false">
+        <a onclick="KPIoption();" href="#" class="ui-btn-left ui-btn ui-btn-icon-left ui-btn-corner-all ui-shadow ui-btn-up-a" data-rel="back" data-icon="arrow-l" data-theme="a"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Back</span><span class="ui-icon ui-icon-arrow-l ui-icon-shadow"></span></span></a>
             <h1>Options</h1>
         </div>
         <div data-role="content">
@@ -51,6 +59,17 @@
                 </div>
             </ul>       
         </div>
+        <div data-role="fieldcontain">
+     <fieldset data-role="controlgroup">
+      <legend>Choix de l'indicateur</legend>
+      <input type="radio" name="Choix" id="Choix_0" onclick="help();"/>
+      <label for="Choix_0">Barre de Progression</label>
+      <input type="radio" name="Choix" id="Choix_1" onclick="help();"/>
+      <label for="Choix_1">Jauge</label>
+      <input type="radio" name="Choix" id="Choix_2" onclick="help();" />
+      <label for="Choix_2">Graphique</label>
+    </fieldset>
+    </div>
     </div>
 </body>
 

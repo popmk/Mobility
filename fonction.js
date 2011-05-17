@@ -140,6 +140,11 @@ function creernewkpi(){
     listGroup();
 };
 
-    
-
-
+        function KPIoption(){
+         if(document.getElementById('Choix_0').checked == true)
+         now.type = "gauge";
+    if(document.getElementById('Choix_1').checked==true)
+        now.type = "truegauge";
+    if(document.getElementById('Choix_2').checked==true)
+        now.type = "chart";
+        };

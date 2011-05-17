@@ -13,7 +13,6 @@ function alert(){
 function menu(){    
 	add_li("Relancer alerte","alert").onclick = function alerte(){getKPI();}; 
     add_li("Stop Alert","stopalert").onclick = function stopalert(){now.StopAlert(); menuStop();};
-	add_li("Choix indicateur visuel","change"); addLink("change","ListKPI.html");	
 	add_li("Options","opt"); addLink("opt","option.html");	
     add_li("S'abonner a un KPI","abokpi"); addLink("abokpi","LoadKPI.html");
 }
