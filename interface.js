@@ -5,40 +5,42 @@ function alert(){
 	add_li("URL","url");    
 	addLink("url","http://www.google.fr");
 	add_li("Mail To","mail");	
+    add_li("Chat","chat");
+    addLink("chat","Chat.html");
 	navigator.notification.alert("Alerte, Seuil dépassé");
-	now.StopAlert();
+	now.StopAlert(currentgroup);
 	
 }
 
 function menu(){    
 	add_li("Relancer alerte","alert").onclick = function alerte(){getKPI();}; 
-    add_li("Stop Alert","stopalert").onclick = function stopalert(){now.StopAlert(); menuStop();};
+    add_li("Stop Alert","stopalert").onclick = function stopalert(){now.StopAlert(currentgroup);};
 	add_li("Options","opt"); addLink("opt","option.html");	
     add_li("S'abonner a un KPI","abokpi"); addLink("abokpi","LoadKPI.html");
 }
 
 
-function updateKPI(){
+function updateKPI(nb){
 	document.getElementById('kpi').innerHTML = "";
-	if(now.type=="chart"){
+	if(type=="chart"){
 		myData.shift();       			
-		myData.push([taille*5,now.KPIcurrent]);					
+		myData.push([taille*5,nb]);					
 		taille = taille + 1;
 		myChart.setDataArray(myData);	
 		myChart.setTitle("KPI");
 		myChart.draw();
 	}
-	if(now.type=="gauge"){                                
+	if(type=="gauge"){                                
 		document.getElementById('kpi').innerHTML = "";
-		my_gauge =gauge.add(document.getElementById('kpi'),{limit:true,gradient:true,values:[now.KPIcurrent,100]});
+		my_gauge =gauge.add(document.getElementById('kpi'),{limit:true,gradient:true,values:[nb,100]});
 	}            
-	if(now.type=="truegauge"){
+	if(type=="truegauge"){
 		document.getElementById('kpi').innerHTML = "<div id=\"gaugeDiv\" style=\"width: 150; height: 150\" ></div>";
 		gauge = bindows.loadGaugeIntoDiv("gauge.xml", "gaugeDiv");
-		gauge.needle.setValue(now.KPIcurrent);  
+		gauge.needle.setValue(nb);  
 	}
 	KPItxt = document.getElementById('kpitxt');
-	KPItxt.innerHTML = ("Seuil d'alerte : " + now.KPIalert + "<br> niveau minimum : " + now.KPImin + "      "+ "courant :" +now.KPIcurrent +"<br> niveau maximum : " + now.KPImax );
+	KPItxt.innerHTML = ("Seuil d'alerte : " + kpialert + "<br> niveau minimum : " + kpimin + "      "+ "courant :" +nb +"<br> niveau maximum : " + kpimax );
 }
 
 function add_li(txt,id) {     
@@ -67,23 +69,23 @@ function addLink(id,url){
 	b.setAttribute('href',url);			
 }
 
-function drawKPI(){
+function drawKPI(nb){
 	document.getElementById('kpi').innerHTML = "";
-	if(now.type=="chart"){
+	if(type=="chart"){
 		myChart = new JSChart('kpi', 'line');
 		myChart.setDataArray(myData);  		
 		myChart.setTitle("KPI");                        
-		myChart.draw();   
+	    myChart.draw();   
 	}
-	if(now.type=="gauge"){
-		my_gauge =gauge.add(document.getElementById('kpi'),{limit:true,gradient:true,values:[now.KPIcurrent,100]});
+	if(type=="gauge"){
+		my_gauge =gauge.add(document.getElementById('kpi'),{limit:true,gradient:true,values:[nb,100]});
 	}
-	if(now.type=="truegauge"){
+	if(type=="truegauge"){
 		document.getElementById('kpi').innerHTML = "<div id=\"gaugeDiv\" style=\"width: 100; height: 100\" ></div>";
 		gauge = bindows.loadGaugeIntoDiv("gauge.xml", "gaugeDiv");
-		gauge.needle.setValue(now.KPIcurrent);  
+		gauge.needle.setValue(nb);  
 	}
 	
 	KPItxt = document.getElementById('kpitxt');
-	KPItxt.innerHTML = ("Seuil d'alerte : " + now.KPIalert + "<br> niveau minimum : " + now.KPImin + "      "+ "courant :" +now.KPIcurrent +"<br> niveau maximum : " + now.KPImax );
+	KPItxt.innerHTML = ("Seuil d'alerte : " + kpialert + "<br> niveau minimum : " + kpimin + "      "+ "courant :" +nb +"<br> niveau maximum : " + kpimax );
 }

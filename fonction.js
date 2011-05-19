@@ -4,11 +4,16 @@ var taille = 4;
 var KPItxt;
 var myChart;
 var gauge;
+var desc = "Default KPI";
+var kpimin = 20;
+var kpimax = 90;
+var kpialert =80;
+var type = "";
+var currentgroup = "";
+
 var myData = new Array([0, 40], [5, 50], [10, 55], [15, 45]);
+var tabKPI = new Array();
 now.name = 'Pop';
-var currentgroup = "KPIuser";
-
-
 
 function description() {
     document.getElementById('label').value = 'Device Name: '     + device.name     + '<br />' + 
@@ -20,70 +25,70 @@ function description() {
 
 
 function getKPI(){  
-	document.getElementById('label').value = now.description; 
+	document.getElementById('label').value = desc; 
     document.getElementById('list').innerHTML = "";
-	drawKPI();
 	menu();
-	now.LaunchKPI();
+	now.LaunchKPI(currentgroup);
+   
 }	
 
 
-function receiveKPI(){
-	updateKPI();	
-	checkalert();
+function receiveKPI(nb){
+	updateKPI(nb);	
+	checkalert(nb);
 }
 
 
-function checkalert(){
-	if(now.KPIcurrent>now.KPIalert)
+function checkalert(nb){
+	if(nb>kpialert)
     	alert();
 }
 
 
 function Gauge(){
-	now.type="gauge";
+	type="gauge";
 	
 };
 function TrueGauge(){
-	now.type="truegauge";    
+	type="truegauge";    
 };
 function Chart(){
-	now.type="chart";
+    type="chart";
 };
 
 function kpioptions(){
-	var kpialert = document.getElementById('kpialert'); kpialert.innerHTML = "KPIalert = " + now.KPIalert;
-	var kpimin = document.getElementById('kpimin'); kpimin.innerHTML = "KPImin = " + now.KPImin;
-	var kpimax = document.getElementById('kpimax'); kpimax.innerHTML = "KPImax = " + now.KPImax;
+document.getElementById('kpialert').innerHTML =  " <h1> KPI alert " + kpialert + "</h1>";
+document.getElementById('kpimin').innerHTML = " <h1> KPI min " + kpimin + "</h1>";
+document.getElementById('kpimax').innerHTML =  " <h1> KPI max " + kpimax + "</h1>";
 }
 
 function kpialertdown(){
-	now.KPIalert--;
-	document.getElementById('kpialert').innerHTML = " <h1> KPI alert " + now.KPIalert + "</h1>";
+	kpialert--;
+	document.getElementById('kpialert').innerHTML = " <h1> KPI alert " + kpialert + "</h1>";
 };
 function kpialertup(){
-	now.KPIalert++;
-	document.getElementById('kpialert').innerHTML = " <h1> KPI alert " + now.KPIalert + "</h1>";
+	kpialert++;
+	document.getElementById('kpialert').innerHTML = " <h1> KPI alert " + kpialert + "</h1>";
 };
 function kpimindown(){
-	now.KPImin--;
-    document.getElementById('kpimin').innerHTML = " <h1> KPI min " + now.KPImin + "</h1>";
-	gauge.limbasse.setEndValue(now.KPImin);
+	kpimin--;
+    document.getElementById('kpimin').innerHTML = " <h1> KPI min " + kpimin + "</h1>";
+	gauge.limbasse.setValue(kpimin);
 };
 function kpiminup(){
-	now.KPImin++;
-    document.getElementById('kpimin').innerHTML = " <h1> KPI min " + now.KPImin + "</h1>";
-	gauge.limbasse.setValue(now.KPImin);
+	kpimin++;
+    document.getElementById('kpimin').innerHTML = " <h1> KPI min " + kpimin + "</h1>";
+	gauge.limbasse.setValue(kpimin);
 };
 function kpimaxdown(){
-	now.KPImax--;
-	 document.getElementById('kpimax').innerHTML = " <h1> KPI max " + now.KPImax + "</h1>";
-	gauge.limhaute.setValue(now.KPImax);
+	kpimax--;
+	 document.getElementById('kpimax').innerHTML = " <h1> KPI max " + kpimax + "</h1>";
+	gauge.limhaute.setValue(kpimax);
 };
 function kpimaxup(){
-	now.KPImax++;
-	 document.getElementById('kpimax').innerHTML = " <h1> KPI max " + now.KPImax + "</h1>";
-	gauge.limhaute.setValue(now.KPImax);
+	kpimax++;
+	 document.getElementById('kpimax').innerHTML = " <h1> KPI max " + kpimax + "</h1>";
+	gauge.limhaute.setValue(kpimax);
 };
 
 
@@ -105,46 +110,61 @@ function add_liKPI(txt,idx) {
 	div2.setAttribute('class','ui-btn-text');
 	div2.appendChild(b);
 	oLi.setAttribute('class','ui-btn ui-btn-up-c ui-btn-icon-right ui-li');
-  
     return b;
 }
 
 function listGroup(){
+    document.getElementById('listloadkpi').innerHTML = "";
     for(i = 0; i < now.array.length ; i++){
-        add_liKPI(now.array[i],i).onclick = onKPIClicked;
+        add_liKPI(now.array[i][0],now.array[i][0]).onclick = onKPIClicked;
     }
     
-    function onKPIClicked(event){
-        now.ChangeGroup(event.target.getAttribute("idx"));
+    function onKPIClicked(event){                
+                if(currentgroup!=""){
+            now.removeFromGroup(currentgroup);
+        }
+        now.getGroupKPI(event.target.getAttribute("idx"));
+        currentgroup = event.target.getAttribute("idx");
     }
 };
 
 function creernewkpi(){
+    
     var nom = document.getElementById('txtnom').value;
-    var desc = document.getElementById('txtdesc').value;
-    var min = document.getElementById('txtmin').value;
-    var max = document.getElementById('txtmax').value;
-    var alert = document.getElementById('txtalert').value;
-    
-    if(document.getElementById('Choix_0').checked == true)
-        var type = "gauge";
-    if(document.getElementById('Choix_1').checked==true)
-        var type = "truegauge";
-    if(document.getElementById('Choix_2').checked==true)
-        var type = "chart";   
+
+    var newdesc = document.getElementById('txtdesc').value;
+    var newmin = document.getElementById('txtmin').value;
+    var newmax = document.getElementById('txtmax').value;
+    var newalert = document.getElementById('txtalert').value;
+
+    if(document.getElementById('Choix_gauge').checked == true)
+        var newtype = "gauge";
+    if(document.getElementById('Choix_truegauge').checked==true)
+        var newtype = "truegauge";
+    if(document.getElementById('Choix_chart').checked==true)
+        var newtype = "chart";              
         
-    navigator.notification.alert("nom : " + nom + " desc : " + desc + " min : " + min + " max :  " + max +" alert : " + alert + " type :" +type );
-    now.addToGroup(nom,desc,min,max,alert,type);
-    
-    
-    listGroup();
+        if(currentgroup!=""){
+            now.removeFromGroup(currentgroup);
+        }
+    now.addToGroup(nom,newdesc,newmin,newmax,newalert,newtype,"test@mail.com");      
+        currentgroup = event.target.getAttribute("idx");
+  listGroup();
 };
 
         function KPIoption(){
          if(document.getElementById('Choix_0').checked == true)
-         now.type = "gauge";
+         type = "gauge";
     if(document.getElementById('Choix_1').checked==true)
-        now.type = "truegauge";
+        type = "truegauge";
     if(document.getElementById('Choix_2').checked==true)
-        now.type = "chart";
+        type = "chart";
+        
+        updateKPI();
         };
+
+
+function SendMsg(){
+    navigator.notification.alert("SendMsg to: " + currentgroup + "     content  : " + getElementById('msgsend').value);
+    now.sendToGroup(currentgroup,getElementById('msgsend').value);
+};
