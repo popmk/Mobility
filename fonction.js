@@ -13,7 +13,6 @@ var currentgroup = "";
 
 var myData = new Array([0, 40], [5, 50], [10, 55], [15, 45]);
 var tabKPI = new Array();
-now.name = 'Pop';
 
 function description() {
     document.getElementById('label').value = 'Device Name: '     + device.name     + '<br />' + 

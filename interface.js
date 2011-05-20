@@ -4,7 +4,7 @@ function alert(){
 	navigator.notification.vibrate(200); 
 	add_li("URL","url");    
 	addLink("url","http://www.google.fr");
-	add_li("Mail To","mail");	
+	add_li("Mail To","mail"); addLink("mail","mail.html");	
     add_li("Chat","chat");
     addLink("chat","Chat.html");
 	navigator.notification.alert("Alerte, Seuil dépassé");
