@@ -10,6 +10,8 @@ var kpimax = 90;
 var kpialert =80;
 var type = "";
 var currentgroup = "";
+//var mail = "popmk@yopmail.com";
+
 
 var myData = new Array([0, 40], [5, 50], [10, 55], [15, 45]);
 var tabKPI = new Array();
@@ -100,7 +102,7 @@ function add_liKPI(txt,idx) {
 	var div2 = document.createElement("div");
 	b.setAttribute('href',"#");
 	b.appendChild(oText);
-    b.setAttribute("idx",idx);
+    b.setAttribute("id",idx);
 	oUl.appendChild(oLi); 
 	oLi.appendChild(div);
 	div.setAttribute('class','ui-btn-inner');
@@ -122,8 +124,10 @@ function listGroup(){
                 if(currentgroup!=""){
             now.removeFromGroup(currentgroup);
         }
-        now.getGroupKPI(event.target.getAttribute("idx"));
-        currentgroup = event.target.getAttribute("idx");
+        var nom = event.target.getAttribute("id");
+        navigator.notification.alert("Indicateur " + nom + " chargé");
+        now.getGroupKPI(nom);
+        currentgroup = nom;
     }
 };
 
@@ -142,13 +146,12 @@ function creernewkpi(){
         var newtype = "truegauge";
     if(document.getElementById('Choix_chart').checked==true)
         var newtype = "chart";              
-        
         if(currentgroup!=""){
             now.removeFromGroup(currentgroup);
         }
-    now.addToGroup(nom,newdesc,newmin,newmax,newalert,newtype,"test@mail.com");      
-        currentgroup = event.target.getAttribute("idx");
-  listGroup();
+        now.addToGroup(nom,newdesc,newmin,newmax,newalert,newtype);      
+        
+        listGroup();
 };
 
         function KPIoption(){

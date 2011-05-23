@@ -32,7 +32,7 @@ function updateKPI(nb){
 	}
 	if(type=="gauge"){                                
 		document.getElementById('kpi').innerHTML = "";
-		my_gauge =gauge.add(document.getElementById('kpi'),{limit:true,gradient:true,values:[nb,100]});
+	$("#kpi").progressbar({ value: nb });
 	}            
 	if(type=="truegauge"){
 		document.getElementById('kpi').innerHTML = "<div id=\"gaugeDiv\" style=\"width: 150; height: 150\" ></div>";
@@ -78,7 +78,7 @@ function drawKPI(nb){
 	    myChart.draw();   
 	}
 	if(type=="gauge"){
-		my_gauge =gauge.add(document.getElementById('kpi'),{limit:true,gradient:true,values:[nb,100]});
+	$("#kpi").progressbar({ value: nb });
 	}
 	if(type=="truegauge"){
 		document.getElementById('kpi').innerHTML = "<div id=\"gaugeDiv\" style=\"width: 100; height: 100\" ></div>";
@@ -89,3 +89,12 @@ function drawKPI(nb){
 	KPItxt = document.getElementById('kpitxt');
 	KPItxt.innerHTML = ("Seuil d'alerte : " + kpialert + "<br> niveau minimum : " + kpimin + "      "+ "courant :" +nb +"<br> niveau maximum : " + kpimax );
 }
+
+function addAdrMail(txt){    
+    document.getElementById('group').innerHTML +=  ("<div class=\"ui-checkbox\"><input type=\"checkbox\" name=\""+txt+"\" id=\""+txt+ "\" class=\"custom\" /><label for=\""+txt+"\">"+txt+"</label></div>");
+}    
+
+ function test(txt){
+ document.getElementById('group').innerHTML +=  ("<div class='ui-checkbox'><input type='checkbox' name='"+txt+"' id='"+txt+"' class='custom'><label for='"+txt+"' data-theme='c' class='ui-btn ui-btn-icon-left ui-btn-up-c'><span class='ui-btn-inner'><span class='ui-btn-text'>"+txt+"</span><span class='ui-icon ui-icon-ui-icon-checkbox-off ui-icon-checkbox-off'></span></span></label></div>");
+ }
+
