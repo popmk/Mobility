@@ -14,6 +14,7 @@ var currentgroup = "";
 
 
 var myData = new Array([0, 40], [5, 50], [10, 55], [15, 45]);
+var tabmail = new Array();
 var tabKPI = new Array();
 
 function description() {
@@ -170,3 +171,49 @@ function SendMsg(){
     navigator.notification.alert("SendMsg to: " + currentgroup + "     content  : " + getElementById('msgsend').value);
     now.sendToGroup(currentgroup,getElementById('msgsend').value);
 };
+
+function addCheckBox(txt,i){
+     var nom = "checkbox-";
+     var id = "idbox-";
+     id = id.concat(parseInt(i));
+     nom = nom.concat(parseInt(i));   
+     var li = document.createElement("li");
+      li.setAttribute("class"," ui-btn ui-btn-icon-right ui-li ui-li-has-alt ui-btn-up-c");
+      var div = document.createElement("div");
+      div.setAttribute("class",'ui-checkbox');
+      var input = document.createElement("input");
+      input.setAttribute("type",'checkbox');
+      input.setAttribute("id",nom);
+      input.setAttribute("name",nom);
+      input.setAttribute("class",'custom');
+      var label = document.createElement("label");
+      label.setAttribute("for",nom);
+      label.setAttribute("data-theme",'c');
+      label.setAttribute("id",id);
+      label.setAttribute("class",'ui-btn ui-btn-icon-left ui-btn-up-c'); 
+      div.appendChild(input);
+      div.appendChild(label);
+      li.appendChild(div);
+      label.innerHTML = txt;
+      document.getElementById('box').appendChild(li);   
+ }
+ 
+ 
+ function validList(){
+     for(i = 0 ; i < tabmail.length ; i++){
+     var nom = "#checkbox-";
+    var id = "#idbox-";
+     id = id.concat(parseInt(i));
+     var label = $(id.toString());
+     nom = nom.concat(parseInt(i));
+     nom = nom.concat(parseInt(i));
+     navigator.notification.alert(label.text());
+    var p = $(nom.toString());
+      var str ;
+         if(p.is(':checked')){    
+             navigator.notification.alert("??");
+            str += label.text()+", ";
+         }        
+     }
+       navigator.notification.alert(str);
+ }

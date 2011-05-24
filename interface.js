@@ -90,11 +90,41 @@ function drawKPI(nb){
 	KPItxt.innerHTML = ("Seuil d'alerte : " + kpialert + "<br> niveau minimum : " + kpimin + "      "+ "courant :" +nb +"<br> niveau maximum : " + kpimax );
 }
 
-function addAdrMail(txt){    
-    document.getElementById('group').innerHTML +=  ("<div class=\"ui-checkbox\"><input type=\"checkbox\" name=\""+txt+"\" id=\""+txt+ "\" class=\"custom\" /><label for=\""+txt+"\">"+txt+"</label></div>");
-}    
 
  function test(txt){
  document.getElementById('group').innerHTML +=  ("<div class='ui-checkbox'><input type='checkbox' name='"+txt+"' id='"+txt+"' class='custom'><label for='"+txt+"' data-theme='c' class='ui-btn ui-btn-icon-left ui-btn-up-c'><span class='ui-btn-inner'><span class='ui-btn-text'>"+txt+"</span><span class='ui-icon ui-icon-ui-icon-checkbox-off ui-icon-checkbox-off'></span></span></label></div>");
+
+ }
+ 
+ function test2(txt,i){
+     
+     var nom = "elem";
+     nom = nom.concat(parseInt(i));
+     
+      var group = document.getElementById('group');
+      var div = document.createElement("div");
+      div.setAttribute("class",'ui-checkbox');
+      var input = document.createElement("input");
+      input.setAttribute("type",'checkbox');
+      input.setAttribute("id",nom);
+      input.setAttribute("name",nom);
+      input.setAttribute("class",'custom');
+      var label = document.createElement("label");
+      label.setAttribute("for",nom);
+      label.setAttribute("data-theme",'c');
+      label.setAttribute("class",'ui-btn ui-btn-icon-left ui-btn-up-c');
+      var span = document.createElement("span");
+      span.setAttribute("class",'ui-btn-inner');
+      var span1 = document.createElement("span");
+      span1.setAttribute("class",'ui-btn-text');
+      var span2 = document.createElement("span");
+      span2.setAttribute("class",'ui-icon ui-icon-ui-icon-checkbox-off ui-icon-checkbox-off');
+      div.appendChild(input);
+      div.appendChild(label);
+      label.appendChild(span);
+      span.appendChild(span1);
+      span.appendChild(span2);
+      span1.innerHTML = txt;
+      document.getElementById('group').appendChild(div);
  }
 

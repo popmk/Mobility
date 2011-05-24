@@ -11,25 +11,51 @@
 		<script src="http://code.jquery.com/mobile/1.0a3/jquery.mobile-1.0a3.min.js" type="text/javascript"></script>
         <script src="http://10.33.171.42:8080/nowjs/now.js"></script>
         <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+
+
+<script>
+function test(){
+  var i = 0;
+     var nom = "#checkbox-";
+     nom = nom.concat(parseInt(i));
+      var id = "#idbox-";
+     id = id.concat(parseInt(i));
+     var label = $(id.toString());
+var p = $(nom.toString());
+       if(p.is(':checked')){
+      navigator.notification.alert(label.text());   
+     }
+     else {
+   navigator.notification.alert("??");
+   }
+    }
+    
+</script>
 </head>
-<body>
-        <div data-role="page" id="page">
-        		<div data-role="header">
-    				<h1>Liste des membres du groupe</h1>
-    			</div>
-                   
-                  
-    <div data-role="fieldcontain">
-     <fieldset data-role="controlgroup"  class="ui-corner-all ui-controlgroup ui-controlgroup-vertical">
-         <div class="ui-controlgroup-controls"  id="group">
-    	<legend>Liste des membres du groupe:</legend>
-
+  <body>
+        <div id ="div" data-role="page">
+            <div data-role="fieldcontain">
+               <div data-role="header">
+    			<h1>Liste Contact</h1>
+			</div>
+               <ul data-role="listview" data-split-icon="gear" data-split-theme="d" id="box" class="ui-listview">
+                         <script>     
+                            document.getElementById('box').innerHTML = "";
+                              for(i = 0; i< tabmail.length; i ++){
+                              addCheckBox(tabmail[i],i);
+                              }
+                               
+                              </script>
+               </ul>
+                     	
+                    
+              
+                <a data-role="button" onclick="test();">Valider</a>
+            </div>
         </div>
-    </fieldset>
-
- 
-                
-        </div>     
+    
 </body>
+    
+</html>
 
 
