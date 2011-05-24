@@ -206,14 +206,14 @@ function addCheckBox(txt,i){
      id = id.concat(parseInt(i));
      var label = $(id.toString());
      nom = nom.concat(parseInt(i));
-     nom = nom.concat(parseInt(i));
      navigator.notification.alert(label.text());
     var p = $(nom.toString());
-      var str ;
+      var str = "";
          if(p.is(':checked')){    
-             navigator.notification.alert("??");
             str += label.text()+", ";
          }        
      }
        navigator.notification.alert(str);
  }
+ 
+ 
