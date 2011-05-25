@@ -54,18 +54,35 @@
                 </div>
             </ul>       
         </div>
-        <div data-role="fieldcontain">
-     <fieldset data-role="controlgroup">
-      <legend>Choix de l'indicateur</legend>
-      <input type="radio" name="Choix" id="Choix_0" onclick="help();"/>
-      <label for="Choix_0">Barre de Progression</label>
-      <input type="radio" name="Choix" id="Choix_1" onclick="help();"/>
-      <label for="Choix_1">Jauge</label>
-      <input type="radio" name="Choix" id="Choix_2" onclick="help();" />
-      <label for="Choix_2">Graphique</label>
-    </fieldset>
+      
+            <div data-role="fieldcontain">
+             <fieldset data-role="controlgroup">
+              <legend>Choix de l'indicateur</legend>
+              <input type="radio" name="Choix" id="Choix_0" onclick="help();"/>
+              <label for="Choix_0">Barre de Progression</label>
+              <input type="radio" name="Choix" id="Choix_1" onclick="help();"/>
+              <label for="Choix_1">Jauge</label>
+              <input type="radio" name="Choix" id="Choix_2" onclick="help();" />
+              <label for="Choix_2">Graphique</label>
+            </fieldset>
+            
+              <div data-role="fieldcontain">
+                 <div data-role="fieldcontain">
+                    <label for="name">Nom utilisateur :</label>
+                    <input type="text" name="name" id="name" value=""  />
+                </div>    
+                   <div data-role="fieldcontain">
+                    <label for="mail">Adresse E-mail :</label>
+                    <input type="text" name="mail" id="mail" value=""  />
+                </div>
+                <a data-role="button" onclick="save();">Enregistrer</a>
+             </div>
+            </div>
+            
+             
+     
     </div>
-    </div>
+    
 </body>
 
 </html>

@@ -9,7 +9,7 @@
 			 
 		<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
 		<script type="text/javascript" charset="utf-8" src="fonction.js"></script>       
-		<script src="http://10.33.171.166:8080/nowjs/now.js"></script>
+		<script src="http://10.33.170.176:8080/nowjs/now.js"></script>
         
 		<script type="text/javascript" src="gauge.js"></script>
 		<script type="text/javascript" src="jscharts.js"></script>
@@ -42,13 +42,10 @@
              };             
         
        now.mail = "";
-       
+       now.pseudo = "";
 		 document.addEventListener("deviceready", onDeviceReady, false);   
          
-       function onDeviceReady() {
-        var db = window.openDatabase("Database", "1.0", "PhoneGap Demo", 200000);
-        db.transaction(populateDB, errorCB, successCB);
-    }
+   
        
 		</script>
 	</head>
@@ -77,8 +74,8 @@
 			</div>
 			<div data-role="content">
 				<ul id="list" data-role="listview">
-					<li id="b" ><a href="#" onclick="getKPI()">Lancer la surveillance</a></li> 
 					<li><a href="option.html">Options</a></li>
+                    <li><a onclick="getKPI();">Run</a></li>
                     <li id="addg" ><a href="LoadKPI.html" onclick="listGroup();">S'abonner à un KPI</a></li>                       
 		    	</ul>
 	   

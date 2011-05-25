@@ -10,7 +10,7 @@ var kpimax = 90;
 var kpialert =80;
 var type = "";
 var currentgroup = "";
-//var mail = "popmk@yopmail.com";
+
 
 
 var myData = new Array([0, 40], [5, 50], [10, 55], [15, 45]);
@@ -216,4 +216,19 @@ function addCheckBox(txt,i){
        navigator.notification.alert(str);
  }
  
+ function save(){
+     var oldmail = now.mail;
+     now.pseudo = document.getElementById('name').value;
+     now.mail = document.getElementById('mail').value; 
+     if(oldmail!=now.mail && oldmail!="" &&currentgroup!=""){
+      now.changeMail(oldmail,now.mail,currentgroup);   
+     }
+     now.echoInfo();
+     };
+ 
+ function sendMsgChat(){
+      var str = now.pseudo + " : "+ document.getElementById('txtmsg').value;
+      now.sendToGroup(currentgroup,str); 
+      document.getElementById('txtmsg').innerHTML = "";   
+ }
  
