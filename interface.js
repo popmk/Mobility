@@ -1,15 +1,20 @@
 function alert(){
     document.getElementById('list').innerHTML = "";
     menu();
+    menuGroup();
 	navigator.notification.vibrate(200); 
 	add_li("URL","url");    
 	addLink("url","http://www.google.fr");
-	add_li("Mail To","mail"); addLink("mail","mail.html");	
-    add_li("Chat","chat");
-    addLink("chat","Chat.html");
 	navigator.notification.alert("Alerte, Seuil dépassé");
 	now.StopAlert(currentgroup);
 	
+}
+
+function menuGroup(){
+     add_li("Mail To","mail"); 
+     addLink("mail","mail.html");    
+    add_li("Chat","chat");
+    addLink("chat","Chat.html");   
 }
 
 function menu(){    
@@ -23,7 +28,7 @@ function menu(){
 function updateKPI(nb){
 	document.getElementById('kpi').innerHTML = "";
 	if(type=="chart"){
-		myData.shift();       			
+        myData.shift(); 			
 		myData.push([taille*5,nb]);					
 		taille = taille + 1;
 		myChart.setDataArray(myData);	
@@ -43,29 +48,58 @@ function updateKPI(nb){
 	KPItxt.innerHTML = ("Seuil d'alerte : " + kpialert + "<br> niveau minimum : " + kpimin + "      "+ "courant :" +nb +"<br> niveau maximum : " + kpimax );
 }
 
-function add_li(txt,id) {     
-	var oUl = document.getElementById('list'); 
-	var oLi = document.createElement("li"); 
-	var oText = document.createTextNode(txt); 		
+function add_li(txt,id){     
+	var oUl = document.getElementById('list');
+    var oLi = document.createElement("li");
+    var oText = document.createTextNode(txt);
 	var b = document.createElement("a");
 	var div = document.createElement("div");
 	var div2 = document.createElement("div");
+    var span = document.createElement("span");
+    span.setAttribute('class','ui-icon ui-icon-arrow-r');
 	b.setAttribute('id',id);
 	b.setAttribute('href',"#");
 	b.appendChild(oText); 
 	oUl.appendChild(oLi); 
 	oLi.appendChild(div);
-	div.setAttribute('class','ui-btn-inner');
+	div.setAttribute('class','ui-btn-inner ui-li');
 	div.appendChild(div2);
 	b.setAttribute('class','ui-link-inherit');
 	div2.setAttribute('class','ui-btn-text');
 	div2.appendChild(b);
 	oLi.setAttribute('class','ui-btn ui-btn-up-c ui-btn-icon-right ui-li');
+    div.appendChild(span);
 	return b;
 }
 
+function addCheckBox(txt,i){
+     var nom = "checkbox-";
+     var id = "idbox-";
+    id = id.concat(parseInt(i));
+    nom = nom.concat(parseInt(i));   
+    var li = document.createElement("li");
+      li.setAttribute("class"," ui-btn ui-btn-icon-right ui-li ui-li-has-alt ui-btn-up-c");
+      var div = document.createElement("div");
+      div.setAttribute("class",'ui-checkbox');
+      var input = document.createElement("input");
+      input.setAttribute("type",'checkbox');
+      input.setAttribute("id",nom);
+      input.setAttribute("name",nom);
+      input.setAttribute("class",'custom');
+      var label = document.createElement("label");
+      label.setAttribute("for",nom);
+      label.setAttribute("data-theme",'c');
+      label.setAttribute("id",id);
+      label.setAttribute("class",'ui-btn ui-btn-icon-left ui-btn-up-c'); 
+      div.appendChild(input);
+      div.appendChild(label);
+      li.appendChild(div);
+      label.innerHTML = txt;
+      document.getElementById('box').appendChild(li);   
+ }
+
 function addLink(id,url){
-	var b = document.getElementById(id);		
+    var b = document.getElementById(id);		
 	b.setAttribute('href',url);			
 }
 
@@ -73,7 +107,7 @@ function drawKPI(nb){
 	document.getElementById('kpi').innerHTML = "";
 	if(type=="chart"){
 		myChart = new JSChart('kpi', 'line');
-		myChart.setDataArray(myData);  		
+        myChart.setDataArray(myData);	
 		myChart.setTitle("KPI");                        
 	    myChart.draw();   
 	}
@@ -91,40 +125,29 @@ function drawKPI(nb){
 }
 
 
- function test(txt){
- document.getElementById('group').innerHTML +=  ("<div class='ui-checkbox'><input type='checkbox' name='"+txt+"' id='"+txt+"' class='custom'><label for='"+txt+"' data-theme='c' class='ui-btn ui-btn-icon-left ui-btn-up-c'><span class='ui-btn-inner'><span class='ui-btn-text'>"+txt+"</span><span class='ui-icon ui-icon-ui-icon-checkbox-off ui-icon-checkbox-off'></span></span></label></div>");
+function add_liKPI(txt,idx) {     
+    var oUl = document.getElementById('listloadkpi'); 
+    var oLi = document.createElement("li"); 
+	var oText = document.createTextNode(txt); 		
+	var b = document.createElement("a");
+	var div = document.createElement("div");
+	var div2 = document.createElement("div");
+     var span = document.createElement("span");
+    span.setAttribute('class','ui-icon ui-icon-arrow-r');
 
- }
- 
- function test2(txt,i){
-     
-     var nom = "elem";
-     nom = nom.concat(parseInt(i));
-     
-      var group = document.getElementById('group');
-      var div = document.createElement("div");
-      div.setAttribute("class",'ui-checkbox');
-      var input = document.createElement("input");
-      input.setAttribute("type",'checkbox');
-      input.setAttribute("id",nom);
-      input.setAttribute("name",nom);
-      input.setAttribute("class",'custom');
-      var label = document.createElement("label");
-      label.setAttribute("for",nom);
-      label.setAttribute("data-theme",'c');
-      label.setAttribute("class",'ui-btn ui-btn-icon-left ui-btn-up-c');
-      var span = document.createElement("span");
-      span.setAttribute("class",'ui-btn-inner');
-      var span1 = document.createElement("span");
-      span1.setAttribute("class",'ui-btn-text');
-      var span2 = document.createElement("span");
-      span2.setAttribute("class",'ui-icon ui-icon-ui-icon-checkbox-off ui-icon-checkbox-off');
-      div.appendChild(input);
-      div.appendChild(label);
-      label.appendChild(span);
-      span.appendChild(span1);
-      span.appendChild(span2);
-      span1.innerHTML = txt;
-      document.getElementById('group').appendChild(div);
- }
+	b.appendChild(oText);
+    b.setAttribute("id",idx);
+	oUl.appendChild(oLi); 
+	oLi.appendChild(div);
+	div.setAttribute('class','ui-btn-inner ui-li');
+	div.appendChild(div2);
+	b.setAttribute('class','ui-link-inherit');
+	div2.setAttribute('class','ui-btn-text');
+	div2.appendChild(b);
+	oLi.setAttribute('class','ui-btn ui-btn-icon-right ui-li ui-li-has-alt ui-btn-up-c');
+       div.appendChild(span);
+    return b;
+}
+
+
 

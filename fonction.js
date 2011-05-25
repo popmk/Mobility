@@ -94,27 +94,6 @@ function kpimaxup(){
 };
 
 
-function add_liKPI(txt,idx) {     
-    var oUl = document.getElementById('listloadkpi'); 
-	var oLi = document.createElement("li"); 
-	var oText = document.createTextNode(txt); 		
-	var b = document.createElement("a");
-	var div = document.createElement("div");
-	var div2 = document.createElement("div");
-	b.setAttribute('href',"#");
-	b.appendChild(oText);
-    b.setAttribute("id",idx);
-	oUl.appendChild(oLi); 
-	oLi.appendChild(div);
-	div.setAttribute('class','ui-btn-inner');
-	div.appendChild(div2);
-	b.setAttribute('class','ui-link-inherit');
-	div2.setAttribute('class','ui-btn-text');
-	div2.appendChild(b);
-	oLi.setAttribute('class','ui-btn ui-btn-up-c ui-btn-icon-right ui-li');
-    return b;
-}
-
 function listGroup(){
     document.getElementById('listloadkpi').innerHTML = "";
     for(i = 0; i < now.array.length ; i++){
@@ -129,6 +108,7 @@ function listGroup(){
         navigator.notification.alert("Indicateur " + nom + " chargé");
         now.getGroupKPI(nom);
         currentgroup = nom;
+        menuGroup();
     }
 };
 
@@ -172,48 +152,24 @@ function SendMsg(){
     now.sendToGroup(currentgroup,getElementById('msgsend').value);
 };
 
-function addCheckBox(txt,i){
-     var nom = "checkbox-";
-     var id = "idbox-";
-     id = id.concat(parseInt(i));
-     nom = nom.concat(parseInt(i));   
-     var li = document.createElement("li");
-      li.setAttribute("class"," ui-btn ui-btn-icon-right ui-li ui-li-has-alt ui-btn-up-c");
-      var div = document.createElement("div");
-      div.setAttribute("class",'ui-checkbox');
-      var input = document.createElement("input");
-      input.setAttribute("type",'checkbox');
-      input.setAttribute("id",nom);
-      input.setAttribute("name",nom);
-      input.setAttribute("class",'custom');
-      var label = document.createElement("label");
-      label.setAttribute("for",nom);
-      label.setAttribute("data-theme",'c');
-      label.setAttribute("id",id);
-      label.setAttribute("class",'ui-btn ui-btn-icon-left ui-btn-up-c'); 
-      div.appendChild(input);
-      div.appendChild(label);
-      li.appendChild(div);
-      label.innerHTML = txt;
-      document.getElementById('box').appendChild(li);   
- }
+
  
  
  function validList(){
+     var str = "";
      for(i = 0 ; i < tabmail.length ; i++){
      var nom = "#checkbox-";
     var id = "#idbox-";
      id = id.concat(parseInt(i));
      var label = $(id.toString());
      nom = nom.concat(parseInt(i));
-     navigator.notification.alert(label.text());
     var p = $(nom.toString());
-      var str = "";
+      
          if(p.is(':checked')){    
             str += label.text()+", ";
          }        
      }
-       navigator.notification.alert(str);
+       document.getElementById('to').value = str;
  }
  
  function save(){
