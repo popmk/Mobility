@@ -1,53 +1,51 @@
-function populateDB(tx) {
-        tx.executeSql('CREATE TABLE IF NOT EXISTS Login (name unique, mail)');
-        tx.executeSql('INSERT INTO Login (name, mail) VALUES ("Popmk", "popmk@yopmail.com")');
+
+    function populateDB(tx) {
+        tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, data)');
     }
 
-    // Query the database
-    //
     function queryDB(tx) {
-        tx.executeSql('SELECT * FROM Login', [], querySuccess, errorCB);
-    }
-    
-    function mail(tx){
-         tx.executeSql('SELECT mail FROM Login', [], querySuccessMail, errorCB);
-        }
-        
-      function name(tx){
-         tx.executeSql('SELECT name FROM Login', [], querySuccessName, errorCB);
-        } 
-
-    // Query the success callback
-    //
-        function call(){
-             var db = window.openDatabase("Database", "1.0", "PhoneGap Demo", 200000);
-             db.transaction(mail,errorCB,querySuccessMail);
-             db.transaction(name,errorCB,querySuccessName);
-            }
-    
-    function querySuccessMail(tx, results) {
-        now.mail = results.rows.item(0).mail;
-        navigator.notification.alert("Mail = "  +  results.rows.item(0).mail);
-        }
-        
-        function querySuccessName(tx, results) {
-            now.name = results.rows.item(0).name;
-            navigator.notification.alert("Name = " + results.rows.item(0).name);
-        }
-    
-    function querySuccess(tx, results) {                      
-            navigator.notification.alert("Name = " + results.rows.item(0).name + " Mail =  " + results.rows.item(0).mail);        
+        tx.executeSql('SELECT * FROM DEMO', [], querySuccess, errorCB);
     }
 
-    // Transaction error callback
-    //
+    function querySuccess(tx, results) {
+        var len = results.rows.length;     
+	  	if(len!=0){
+			now.pseudo = results.rows.item(0).id;
+			now.mail = results.rows.item(0).data;
+		}
+		else{
+			alert("Pensez à enregistrer votre pseudo et mail dans le menu option");
+		}
+    }
+
+    function requeteAll(tx) {
+        tx.executeSql('SELECT * FROM DEMO', [], querySuccess, errorCB);
+    }
+
     function errorCB(err) {
-         navigator.notification.alert("Error processing SQL: "+err.code);
+        alert("Error processing SQL: "+err.code);
     }
 
-    // Transaction success callback
-    //
-    function successCB() {
+    function getInfo() {
         var db = window.openDatabase("Database", "1.0", "PhoneGap Demo", 200000);
-        db.transaction(queryDB, errorCB);
+        db.transaction(requeteAll, errorCB);
     }
+	
+	function insert(tx){			
+		tx.executeSql('INSERT INTO DEMO (id, data) VALUES ("'+now.pseudo+'", "'+now.mail+'")');
+	}
+	
+	function del(tx){
+		tx.executeSql('DELETE FROM DEMO');	
+	}
+	
+	
+	function transactionInsert(){		
+		var db = window.openDatabase("Database", "1.0", "PhoneGap Demo", 200000);
+        db.transaction(insert, errorCB);
+	}
+	
+	function transactionDel(){
+		var db = window.openDatabase("Database", "1.0", "PhoneGap Demo", 200000);
+        db.transaction(del, errorCB);
+	}

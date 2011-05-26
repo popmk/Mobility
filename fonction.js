@@ -176,9 +176,11 @@ function SendMsg(){
      var oldmail = now.mail;
      now.pseudo = document.getElementById('name').value;
      now.mail = document.getElementById('mail').value; 
-     if(oldmail!=now.mail && oldmail!="" &&currentgroup!=""){
+     if(oldmail!=now.mail && oldmail!="" && currentgroup!=""){
       now.changeMail(oldmail,now.mail,currentgroup);   
      }
+     transactionDel();
+     transactionInsert();
      now.echoInfo();
      };
  
