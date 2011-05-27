@@ -10,7 +10,7 @@
 		<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
 		<script type="text/javascript" charset="utf-8" src="fonction.js"></script>       
 	<!--  <script src="http://88.164.53.59:6661/nowjs/now.js"></script>                    Serveur Renaud                     -->
-       <script src="10.33.171.166:8080/nowjs/now.js"></script>          <!--               Serveur SQLi                    -->
+       <script src="http://10.33.171.166:8000/nowjs/now.js"></script>          <!--               Serveur SQLi                    -->
 		<script type="text/javascript" src="gauge.js"></script>
 		<script type="text/javascript" src="jscharts.js"></script>
 		<script type="text/javascript" src="bindows_gauges/bindows_gauges.js"></script>
@@ -45,12 +45,10 @@
        now.mail = "";
        now.pseudo = "";
     document.addEventListener('deviceready', onDeviceReady, false);
-       function onLoad(){
-		 document.addEventListener('deviceready', onDeviceReady, false);
-       };
+      
          
         function onDeviceReady(){
-            document.getElementById('label').value = "shit";
+           
            // var db = window.openDatabase("Database", "1.0", "PhoneGap Demo", 200000);
           //  db.transaction(populateDB, errorCB);    // crée Db
          //   getInfo(); // cherche pseudo et mail dans DB
@@ -59,7 +57,7 @@
        
 		</script>
 	</head>
-	<body onload="onLoad();">
+	<body>
 		<div data-role="page" id="page">
 			<div data-role="header">
 				<h1>Description</h1>
