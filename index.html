@@ -9,13 +9,14 @@
 			 
 		<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
 		<script type="text/javascript" charset="utf-8" src="fonction.js"></script>       
-		<script src="http://88.164.53.59:8000/nowjs/now.js"></script>
-        
+	<!--  <script src="http://88.164.53.59:6661/nowjs/now.js"></script>                    Serveur Renaud                     -->
+       <script src="10.33.171.166:8080/nowjs/now.js"></script>          <!--               Serveur SQLi                    -->
 		<script type="text/javascript" src="gauge.js"></script>
 		<script type="text/javascript" src="jscharts.js"></script>
 		<script type="text/javascript" src="bindows_gauges/bindows_gauges.js"></script>
         <script type="text/javascript" src="interface.js"></script>      
        <script type="text/javascript" src="storage.js"></script>
+        
         
 		<script>                        
 			now.KPI = function(nb){
@@ -43,9 +44,9 @@
         
        now.mail = "";
        now.pseudo = "";
-    
+    document.addEventListener('deviceready', onDeviceReady, false);
        function onLoad(){
-		 
+		 document.addEventListener('deviceready', onDeviceReady, false);
        };
          
         function onDeviceReady(){
@@ -58,7 +59,7 @@
        
 		</script>
 	</head>
-	<body onload="document.addEventListener('deviceready', onDeviceReady, false);">
+	<body onload="onLoad();">
 		<div data-role="page" id="page">
 			<div data-role="header">
 				<h1>Description</h1>
