@@ -97,15 +97,17 @@ function kpimaxup(){
 function listGroup(){
     document.getElementById('listloadkpi').innerHTML = "";
     for(i = 0; i < now.array.length ; i++){
-        add_liKPI(now.array[i][0],now.array[i][0]).onclick = onKPIClicked;
+        add_liKPI(now.array[i][0],now.array[i][0]).onclick = onKPIClicked;  
+     
     }
     
-    function onKPIClicked(event){                
-                if(currentgroup!=""){
+    function onKPIClicked(event){          
+        document.getElementById('label').value = "works";
+        if(currentgroup!=""){
             now.removeFromGroup(currentgroup);
         }
         var nom = event.target.getAttribute("id");
-        navigator.notification.alert("Indicateur " + nom + " chargé");
+        //navigator.notification.alert("Indicateur " + nom + " chargé");
         now.getGroupKPI(nom);
         currentgroup = nom;
         menuGroup();
@@ -179,8 +181,8 @@ function SendMsg(){
      if(oldmail!=now.mail && oldmail!="" && currentgroup!=""){
       now.changeMail(oldmail,now.mail,currentgroup);   
      }
-     transactionDel();
-     transactionInsert();
+     //transactionDel();
+     //transactionInsert();
      now.echoInfo();
      };
  

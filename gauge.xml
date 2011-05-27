@@ -15,7 +15,7 @@
     <Gauge2RadialRange centerX="500" centerY="500" width="1000" height="1000" startAngle="-135" endAngle="135">
 
         <!-- Scale -->
-        <Gauge2RadialScale radius="430" startValue="0" endValue="100">
+        <Gauge2RadialScale radius="430" startValue="0" endValue="1000">
             <Gauge2RadialScaleSection sectionWidth="30" color="#CCDDFF" stroke="gray" strokeWidth="3" radius="360" startValue="0" endValue="100"/>
             <Gauge2RadialScaleSection sectionWidth="66" color="#AAFF99" stroke="gray" strokeWidth="3" radius="300" startValue="0" endValue="20" id="limbasse"/>
             <Gauge2RadialScaleSection sectionWidth="66" color="#FFAA99" stroke="gray" strokeWidth="3" radius="300" startValue="80" endValue="100" id="limhaute"/>

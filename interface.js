@@ -62,7 +62,7 @@ function add_li(txt,id){
 	b.appendChild(oText); 
 	oUl.appendChild(oLi); 
 	oLi.appendChild(div);
-	div.setAttribute('class','ui-btn-inner ui-li');
+	div.setAttribute('class','ui-btn-inner');
 	div.appendChild(div2);
 	b.setAttribute('class','ui-link-inherit');
 	div2.setAttribute('class','ui-btn-text');
@@ -73,11 +73,11 @@ function add_li(txt,id){
 }
 
 function addCheckBox(txt,i){
-     var nom = "checkbox-";
-     var id = "idbox-";
-    id = id.concat(parseInt(i));
-    nom = nom.concat(parseInt(i));   
-    var li = document.createElement("li");
+      var nom = "checkbox-";
+      var id = "idbox-";
+      id = id.concat(parseInt(i));
+      nom = nom.concat(parseInt(i));   
+      var li = document.createElement("li");
       li.setAttribute("class"," ui-btn ui-btn-icon-right ui-li ui-li-has-alt ui-btn-up-c");
       var div = document.createElement("div");
       div.setAttribute("class",'ui-checkbox');
@@ -132,7 +132,7 @@ function add_liKPI(txt,idx) {
 	var b = document.createElement("a");
 	var div = document.createElement("div");
 	var div2 = document.createElement("div");
-     var span = document.createElement("span");
+    var span = document.createElement("span");
     span.setAttribute('class','ui-icon ui-icon-arrow-r');
 
 	b.appendChild(oText);
@@ -145,7 +145,7 @@ function add_liKPI(txt,idx) {
 	div2.setAttribute('class','ui-btn-text');
 	div2.appendChild(b);
 	oLi.setAttribute('class','ui-btn ui-btn-icon-right ui-li ui-li-has-alt ui-btn-up-c');
-       div.appendChild(span);
+    div.appendChild(span);
     return b;
 }
 
