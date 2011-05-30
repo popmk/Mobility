@@ -107,7 +107,7 @@ function listGroup(){
             now.removeFromGroup(currentgroup);
         }
         var nom = event.target.getAttribute("id");
-        //navigator.notification.alert("Indicateur " + nom + " chargé");
+        navigator.notification.alert("Indicateur " + nom + " chargé");
         now.getGroupKPI(nom);
         currentgroup = nom;
         menuGroup();

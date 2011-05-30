@@ -1,12 +1,12 @@
 function alert(){
+        now.StopAlert(currentgroup);
     document.getElementById('list').innerHTML = "";
     menu();
     menuGroup();
-	navigator.notification.vibrate(200); 
 	add_li("URL","url");    
 	addLink("url","http://www.google.fr");
 	navigator.notification.alert("Alerte, Seuil dépassé");
-	now.StopAlert(currentgroup);
+    navigator.notification.vibrate(200);
 	
 }
 

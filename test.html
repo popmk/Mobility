@@ -5,14 +5,15 @@
     <title>Contact Example</title>
     <script src="http://10.33.171.166:8080/nowjs/now.js"></script>
     <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
-    <script type="text/javascript" charset="utf-8" src="storage.js">
+    <script type="text/javascript" charset="utf-8" src="storage.js"></script>
     <script type="text/javascript" charset="utf-8">
     
     // Wait for PhoneGap to load
     //
     function onLoad() {
         document.addEventListener("deviceready", onDeviceReady, false);
-        navigator.notification.alert("ppppp");document.getElementById('txt').innerHTML +="pppp";
+        navigator.notification.alert("ppppp");
+        document.getElementById('txt').innerHTML +="pppp";
     }
 
     // Populate the database 
@@ -22,7 +23,12 @@
     // PhoneGap is ready
     //
   
-
+   function onDeviceReady(){          
+              
+           // var db = window.openDatabase("Database", "1.0", "PhoneGap Demo", 200000);
+          //  db.transaction(populateDB, errorCB);    // crée Db
+         //   getInfo(); // cherche pseudo et mail dans DB
+             };
     </script>
   </head>
   <body onload="onLoad()">

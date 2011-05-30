@@ -10,15 +10,17 @@
 		<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
 		<script type="text/javascript" charset="utf-8" src="fonction.js"></script>       
 	<!--  <script src="http://88.164.53.59:6661/nowjs/now.js"></script>                    Serveur Renaud                     -->
-       <script src="http://10.33.171.166:8000/nowjs/now.js"></script>          <!--               Serveur SQLi                    -->
+       <script src="http://10.33.171.166:8080/nowjs/now.js"></script>          <!--               Serveur SQLi                    -->
 		<script type="text/javascript" src="gauge.js"></script>
 		<script type="text/javascript" src="jscharts.js"></script>
 		<script type="text/javascript" src="bindows_gauges/bindows_gauges.js"></script>
         <script type="text/javascript" src="interface.js"></script>      
-       <script type="text/javascript" src="storage.js"></script>
-        
-        
-		<script>                        
+     <!--  <script type="text/javascript" src="storage.js"></script>        -->
+		<script type="text/javascript">     
+            function onDeviceReady() {
+               now.Log("DeviceReady");              
+            }
+            
 			now.KPI = function(nb){
                     drawKPI(nb);
 				receiveKPI(nb);
@@ -41,23 +43,17 @@
                 kpialert = alert;
                 type = typ;             
              };             
-        
-       now.mail = "";
-       now.pseudo = "";
-    document.addEventListener('deviceready', onDeviceReady, false);
-      
-         
-        function onDeviceReady(){
-           
-           // var db = window.openDatabase("Database", "1.0", "PhoneGap Demo", 200000);
-          //  db.transaction(populateDB, errorCB);    // crée Db
-         //   getInfo(); // cherche pseudo et mail dans DB
-             };
-   
-       
+     
+          function onLoad(){
+               document.addEventListener("deviceready", onDeviceReady, false);               
+            }
+            
+            now.mail = "";
+            now.pseudo = "";
+            
 		</script>
 	</head>
-	<body>
+	<body onload="onLoad()">
 		<div data-role="page" id="page">
 			<div data-role="header">
 				<h1>Description</h1>
@@ -84,10 +80,8 @@
 				<ul id="list" data-role="listview">
 					<li><a href="option.html">Options</a></li>
                     <li><a onclick="getKPI();">Run</a></li>
-                    <li id="addg" ><a href="LoadKPI.html" onclick="listGroup();">S'abonner à un KPI</a></li>                       
-                    <li><a onclick="now.Log('test'); ">Test</a></li>
-		    	</ul>
-	   
+                    <li id="addg" ><a href="LoadKPI.html" onclick="listGroup();">S'abonner à un KPI</a></li>                                           
+		    	</ul>	   
         </div>
 
 	</body>
