@@ -6,8 +6,7 @@ function alert(){
 	add_li("URL","url");    
 	addLink("url","http://www.google.fr");
 	navigator.notification.alert("Alerte, Seuil dépassé");
-    navigator.notification.vibrate(200);
-	
+    navigator.notification.vibrate(200);	
 }
 
 function menuGroup(){
@@ -42,7 +41,9 @@ function updateKPI(nb){
 	if(type=="truegauge"){
 		document.getElementById('kpi').innerHTML = "<div id=\"gaugeDiv\" style=\"width: 150; height: 150\" ></div>";
 		gauge = bindows.loadGaugeIntoDiv("gauge.xml", "gaugeDiv");
-		gauge.needle.setValue(nb);  
+        gauge.needlelow.setEndValue(kpimin);
+        gauge.needlehigh.setStartValue(kpimax);
+		gauge.needle.setValue(nb);          
 	}
 	KPItxt = document.getElementById('kpitxt');
 	KPItxt.innerHTML = ("Seuil d'alerte : " + kpialert + "<br> niveau minimum : " + kpimin + "      "+ "courant :" +nb +"<br> niveau maximum : " + kpimax );
@@ -68,6 +69,7 @@ function add_li(txt,id){
 	div2.setAttribute('class','ui-btn-text');
 	div2.appendChild(b);
 	oLi.setAttribute('class','ui-btn ui-btn-up-c ui-btn-icon-right ui-li');
+     span.setAttribute('class','ui-icon ui-icon-arrow-r');
     div.appendChild(span);
 	return b;
 }

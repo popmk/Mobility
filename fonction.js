@@ -75,22 +75,18 @@ function kpialertup(){
 function kpimindown(){
 	kpimin--;
     document.getElementById('kpimin').innerHTML = " <h1> KPI min " + kpimin + "</h1>";
-	gauge.limbasse.setValue(kpimin);
 };
 function kpiminup(){
 	kpimin++;
     document.getElementById('kpimin').innerHTML = " <h1> KPI min " + kpimin + "</h1>";
-	gauge.limbasse.setValue(kpimin);
 };
 function kpimaxdown(){
 	kpimax--;
 	 document.getElementById('kpimax').innerHTML = " <h1> KPI max " + kpimax + "</h1>";
-	gauge.limhaute.setValue(kpimax);
 };
 function kpimaxup(){
 	kpimax++;
 	 document.getElementById('kpimax').innerHTML = " <h1> KPI max " + kpimax + "</h1>";
-	gauge.limhaute.setValue(kpimax);
 };
 
 
@@ -101,8 +97,7 @@ function listGroup(){
      
     }
     
-    function onKPIClicked(event){          
-        document.getElementById('label').value = "works";
+    function onKPIClicked(event){                  
         if(currentgroup!=""){
             now.removeFromGroup(currentgroup);
         }
