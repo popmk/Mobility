@@ -5,7 +5,7 @@ function alert(){
     menuGroup();
 	add_li("URL","url");    
 	addLink("url","http://www.google.fr");
-	navigator.notification.alert("Alerte, Seuil dépassé");
+	navigator.notification.alert("Alerte, Seuil depasse");
     navigator.notification.vibrate(200);	
 }
 
@@ -26,24 +26,20 @@ function menu(){
 
 function updateKPI(nb){
 	document.getElementById('kpi').innerHTML = "";
+	 myData.shift();    
+     var str = taille*5;
+     str = str + "";
+     myData.push([str,nb]);                 
+     taille = taille + 1;
+     
 	if(type=="chart"){
-        myData.shift(); 			
-		myData.push([taille*5,nb]);					
-		taille = taille + 1;
-		myChart.setDataArray(myData);	
-		myChart.setTitle("KPI");
-		myChart.draw();
+		ChartLine();
 	}
-	if(type=="gauge"){                                
-		document.getElementById('kpi').innerHTML = "";
-	$("#kpi").progressbar({ value: nb });
+	if(type=="gauge"){    
+	    ChartBar();
 	}            
 	if(type=="truegauge"){
-		document.getElementById('kpi').innerHTML = "<div id=\"gaugeDiv\" style=\"width: 150; height: 150\" ></div>";
-		gauge = bindows.loadGaugeIntoDiv("gauge.xml", "gaugeDiv");
-        gauge.needlelow.setEndValue(kpimin);
-        gauge.needlehigh.setStartValue(kpimax);
-		gauge.needle.setValue(nb);          
+	    Gauge(nb);
 	}
 	KPItxt = document.getElementById('kpitxt');
 	KPItxt.innerHTML = ("Seuil d'alerte : " + kpialert + "<br> niveau minimum : " + kpimin + "      "+ "courant :" +nb +"<br> niveau maximum : " + kpimax );
@@ -104,24 +100,66 @@ function addLink(id,url){
     var b = document.getElementById(id);		
 	b.setAttribute('href',url);			
 }
+function ChartBar(){
+    BarChart = new JSChart('kpi', 'bar');
+    BarChart.setDataArray(myData);
+    BarChart.setSize(300, 225);
+    BarChart.setBarValues(false);
+    BarChart.setBarOpacity(0.7);
+    BarChart.setBarSpacingRatio(35);
+    BarChart.setBarBorderWidth(0);
+    BarChart.setTitle('KPI');
+    BarChart.setTitleFontSize(10);
+    BarChart.setTitleColor('#408F7F');
+    BarChart.setAxisValuesColor('#408F7F');
+    BarChart.setAxisNameX('Evolution');
+    BarChart.setAxisNameY('%');
+    BarChart.setAxisNameColor('#408F7F');
+    BarChart.setAxisColor('#5DB0A0');
+    BarChart.setGridOpacity(0.8);
+    BarChart.setGridColor('#B9D7C9');    
+    BarChart.draw();
+}
+
+function ChartLine(){    
+    myChart = new JSChart('kpi', 'line', '', '');
+    myChart.setDataArray(myData);
+    myChart.setSize(300,225);
+    myChart.setIntervalStartY(kpimin);
+    myChart.setIntervalEndY(kpimax);
+    myChart.setLineColor('#632C8C');
+    myChart.setLineWidth(4);
+    myChart.setGridColor('#0072BB');
+    myChart.setAxisColor('#0072BB');
+    myChart.setTitleColor('#632C8C');
+    myChart.setAxisValuesColor('#632C8C');
+    myChart.setAxisNameX(' ');
+    myChart.setAxisNameY(' ');
+    myChart.setGridOpacity(0.8);
+    myChart.setGraphExtend(true);
+    myChart.setTitle('KPI');
+    myChart.draw();
+}
+
+function Gauge(nb){
+    document.getElementById('kpi').innerHTML = '<div id="jGaugeDemo" class="jgauge"></div>';
+    demoGauge = new jGauge(); 
+    demoGauge.id = 'jGaugeDemo';
+    demoGauge.init();
+    demoGauge.setValue(nb);
+}
 
 function drawKPI(nb){
 	document.getElementById('kpi').innerHTML = "";
 	if(type=="chart"){
-		myChart = new JSChart('kpi', 'line');
-        myChart.setDataArray(myData);	
-		myChart.setTitle("KPI");                        
-	    myChart.draw();   
+		ChartLine();
 	}
 	if(type=="gauge"){
-	$("#kpi").progressbar({ value: nb });
+	    ChartBar();
 	}
 	if(type=="truegauge"){
-		document.getElementById('kpi').innerHTML = "<div id=\"gaugeDiv\" style=\"width: 100; height: 100\" ></div>";
-		gauge = bindows.loadGaugeIntoDiv("gauge.xml", "gaugeDiv");
-		gauge.needle.setValue(nb);  
+	    Gauge(nb);
 	}
-	
 	KPItxt = document.getElementById('kpitxt');
 	KPItxt.innerHTML = ("Seuil d'alerte : " + kpialert + "<br> niveau minimum : " + kpimin + "      "+ "courant :" +nb +"<br> niveau maximum : " + kpimax );
 }

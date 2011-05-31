@@ -3,6 +3,7 @@ var my_gauge;
 var taille = 4;
 var KPItxt;
 var myChart;
+var BarChart;
 var gauge;
 var desc = "Default KPI";
 var kpimin = 20;
@@ -10,10 +11,11 @@ var kpimax = 90;
 var kpialert =80;
 var type = "";
 var currentgroup = "";
+var demoGauge;
 
 
 
-var myData = new Array([0, 40], [5, 50], [10, 55], [15, 45]);
+var myData = new Array([0+"", 40], [5+"", 50], [10+"", 55], [15+"", 45]);
 var tabmail = new Array();
 var tabKPI = new Array();
 

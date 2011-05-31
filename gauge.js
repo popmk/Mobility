@@ -156,8 +156,10 @@ var gauge = { version : 1.4, released : '2010-08-10 12:00:00',
 	remove : function(self) {
 		if(self) {if(self.tagName.toUpperCase()=="CANVAS"||self.tagName.toUpperCase()=="VAR") {var parent=self.parentNode; parent.removeChild(self);}}return false;
 	}
+}
+	/*
 <<<<<<< HEAD
 }	
 =======
 }	
->>>>>>> c85f67751593a895beaa3c724dbfa62487ec1ae5
+>>>>>>> c85f67751593a895beaa3c724dbfa62487ec1ae5*/

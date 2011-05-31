@@ -1,4 +1,4 @@
-/*
+
     function populateDB(tx) {
         tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, data)');
     }
@@ -14,7 +14,7 @@
 			now.mail = results.rows.item(0).data;
 		}
 		else{
-			navigator.notification.alert("Pensez ├а enregistrer votre pseudo et mail dans le menu option");
+			navigator.notification.alert("Pensez ра enregistrer votre pseudo et mail dans le menu option");
 		}
     }
 
@@ -48,4 +48,4 @@
 	function transactionDel(){
 		var db = window.openDatabase("Database", "1.0", "PhoneGap Demo", 200000);
         db.transaction(del, errorCB);
-	}*/
+	}
